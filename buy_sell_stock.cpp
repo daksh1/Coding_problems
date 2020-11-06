@@ -7,7 +7,7 @@ int calc_max_profit(vector<int> &prices){
     for(int i=1;i<prices.size();i++){
         difference=max(0,difference+prices[i]-prices[i-1]);      //pretty straighforward, difference of each pair is being
         result=max(result,difference);                           //calculated here, and if its -ve, reset to 0
-    }                                                            //result is storing max difference unitil present
+    }                                                            //result is storing max difference until present
     return result;
 }
 int main(){
