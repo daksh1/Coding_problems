@@ -14,11 +14,11 @@ vector<int> binary_search(int start,int end,vector<int> &v,int target,vector<int
         else end=mid;       
     }
     
-    if(v[start]!=target) return {-1,-1};
+    if(v[start]!=target) return {-1,-1};        //end=start here
     result[0]=start;
     end=v.size()-1;
     while(start<end){ 
-        int mid=(start+end)/2 +1;           //if not +1, then for the last two elements in the terminating condition, mid doesn't move forward
+        int mid=(start+end)/2 +1;           //(index i-1 + index i)/2 always gives i-1, so add 1 to move mid to the next index
         if(target<v[mid])
             end=mid-1;
         else start=mid;
