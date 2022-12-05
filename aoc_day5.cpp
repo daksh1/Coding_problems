@@ -2,14 +2,13 @@
 using namespace std;
 
 vector<stack<char>>input(){
-    string line;
+    string line,s;
     ifstream myfile ("input_aoc5");
     vector<string>input;
-    vector<stack<char>>stacks_of_crates(10);
     if (myfile.is_open()){
         while (getline(myfile,line)){
             if(line[0] != 'm' && line.length() != 0 && line[1] != '1' ){
-                string s = "";
+                s = "";
                 for(int i=1;i<line.length();i+=4){
                     s+=line[i];
                 }
@@ -21,6 +20,8 @@ vector<stack<char>>input(){
     }
     else 
         cout<<"unable to open file";
+
+    vector<stack<char>>stacks_of_crates(s.length()+1);
     
     for(int i=input.size()-1;i>=0;i--){
         for(int j=0;j<input[i].length();j++){
@@ -86,10 +87,12 @@ int main(){
         cout<<"unable to open file";
 
     string s="";
-    for(int i=0;i<10;i++){
+
+    for(int i=0;i<stacks_of_crates.size()-1;i++){
         if (!(stacks_of_crates[i+1].empty()))
             s+=stacks_of_crates[i+1].top();
     }
+    
     cout<< s;
 
 
