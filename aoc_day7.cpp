@@ -1,10 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+
 int main(){
     string line,dir_name;
     ifstream myfile ("input_aoc7");
-    stack<string>last_dir;
+    stack<string>current_dir,dir_stack;
     unordered_map<string,vector<string>>dir_tree;
     unordered_map<string,int>dir_size;
     int file_size;
@@ -19,32 +21,28 @@ int main(){
                     dir_name=line.substr(5);
                     first_entry=false;
                 }
-                else dir_name=last_dir.top()+line.substr(5);
-
-                //if(dir_tree.find(dir_name) == dir_tree.end() )
-                //dir_tree[dir_name];             
-                last_dir.push(dir_name);
-                //debg<<last_dir.top();
-                //file_size=0;
+                else {
+                    dir_name=current_dir.top()+line.substr(5);
+                }
+                dir_name = dir_name.substr(0,dir_name.length()-1);  //removing carriage return (\r) at the end 
+                current_dir.push(dir_name);
+                dir_stack.push(dir_name);
             }
             else if(line.substr(0,3) == "dir"){
-
-                dir_name= last_dir.top()+line.substr(4);
-                dir_tree[last_dir.top()].push_back(dir_name);
-                //cout<<dir_name<<endl;
-                //debg<<dir_name<<endl;
+                dir_name= current_dir.top()+line.substr(4);
+                dir_name= dir_name.substr(0,dir_name.length()-1);
+                dir_tree[current_dir.top()].push_back(dir_name);
 
             }
             else if (line.substr(0,7) == "$ cd .."){
-                last_dir.pop();
-                //debg<<last_dir.top()<<endl;
+                current_dir.pop();
             }
 
             else if(line.substr(0,4)=="$ ls") file_size=0;
             
             else {
                 file_size = stoi(line.substr(0,line.find(" ")));
-                dir_size[last_dir.top()]+=file_size;
+                dir_size[current_dir.top()]+=file_size;
             }
                
         } 
@@ -53,22 +51,29 @@ int main(){
 
     else 
         cout<<"unable to open file";
-
-    for(auto i: dir_tree){
-        //cout<< i.first<<endl;
-        for(int j=0;j<dir_tree[i.first].size();j++){
-            dir_size[i.first]+=dir_size[dir_tree[i.first][j]];
-        }
-    }
     
-    int sum=0;
-    for(auto i:dir_size){
-        //cout<< i.first <<endl;
-        if(i.second <=100000)
-            sum+=i.second;
+    while(dir_stack.size() != 0){
+        for(int i=0; i < dir_tree[dir_stack.top()].size();i++){
+            dir_size[dir_stack.top()]+= dir_size[dir_tree[dir_stack.top()][i]];
+        }
+        dir_stack.pop();
     }
 
-    cout<<sum<<endl;
+    int sum=0;
+    int unused_space = 70000000 - dir_size["/"]; 
+    int additional_space_needed = 30000000 - unused_space;
+    int smallest_dir_size_to_delete_for_update = 700000001;
+
+    for(auto i:dir_size){
+        /* part 1
+        if(i.second <=100000)
+            sum+=i.second; */
+       if(i.second >= additional_space_needed){
+            smallest_dir_size_to_delete_for_update = min(smallest_dir_size_to_delete_for_update,i.second);
+       }
+    }
+    //cout<<sum<<endl;
+    cout<<smallest_dir_size_to_delete_for_update;
     return 0;
         
 }
