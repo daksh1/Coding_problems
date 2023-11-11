@@ -11,7 +11,6 @@ int main(){
     unordered_map<string,int>dir_size;
     int file_size;
     bool first_entry=true;
-    ofstream debg ("output_file");
 
     if (myfile.is_open()){
         while (getline(myfile,line)){
