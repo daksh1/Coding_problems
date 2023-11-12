@@ -10,6 +10,7 @@ int main(){
     unordered_map<string,vector<string>>dir_tree;
     unordered_map<string,int>dir_size;
     int file_size;
+    int sum=0;
     bool first_entry=true;
 
     if (myfile.is_open()){
@@ -58,7 +59,7 @@ int main(){
         dir_stack.pop();
     }
 
-    int sum=0;
+    // variables for part 2
     int unused_space = 70000000 - dir_size["/"]; 
     int additional_space_needed = 30000000 - unused_space;
     int smallest_dir_size_to_delete_for_update = 700000001;
@@ -67,7 +68,7 @@ int main(){
         /* part 1
         if(i.second <=100000)
             sum+=i.second; */
-       if(i.second >= additional_space_needed){
+        if(i.second >= additional_space_needed){
             smallest_dir_size_to_delete_for_update = min(smallest_dir_size_to_delete_for_update,i.second);
        }
     }
