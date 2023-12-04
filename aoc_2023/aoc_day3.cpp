@@ -8,7 +8,7 @@ typedef struct pn_gear_coordinates{
     int gear_col;
 }pn_gear;
 
-bool part2(int row, int col_start,int col_end, vector<string>& input, pn_gear &p){
+bool store_part_num_and_adjacent_gear_coordinates(int row, int col_start,int col_end, vector<string>& input, pn_gear &p){
     //top left corner
     if(row==0 && col_start ==0){
         if(input[0][col_end+1] == '*'){
@@ -172,8 +172,8 @@ bool part2(int row, int col_start,int col_end, vector<string>& input, pn_gear &p
         }
     }
     return false;
-
 }
+
 bool is_part_number(int row, int col_start,int col_end, vector<string>& input){
     //top left corner
     if(row==0 && col_start ==0){
@@ -271,26 +271,27 @@ bool is_part_number(int row, int col_start,int col_end, vector<string>& input){
             return true;
     }
     return false;
-
 }
+
 int main(){
     string line;
+    int num,row=0,col_start=0,col_end=0,sum=0,i=0,sum_gear_ratios=0;
     vector<string>input;
-    int num,row=0,col_start=0,col_end=0,sum=0,i=0;
-    vector<pn_gear> pg; 
+    vector<pn_gear> part_num_and_associated_gear_list; 
+    unordered_set<int> visited_indices;
     ifstream myfile ("input_aoc3");
+
     if (myfile.is_open()){
         while (getline(myfile,line)){
             input.push_back(line);
         }
         myfile.close();
     }
-
     else{
         cout<<"unable to open file";
     }
+
     for(auto it:input){
-        //cout<<it<<endl;
         i=0;
         while(i < it.length()){
             int pos;
@@ -301,42 +302,37 @@ int main(){
                     s+=it[i];
                     i++;
                 }
-                //cout<<s<<endl;
                 col_end=i-1;
                 num=stoi(s);
-                //cout<<"row:"<<row<<" col_start:"<<col_start<<" col_end:"<<col_end;
                 // bool is_part_num = is_part_number(row,col_start,col_end,input);
                 // if(is_part_num){
-                //     cout<<num<<endl;
                 //     sum+=num;
                 // }
                 pn_gear p;
-                if(part2(row,col_start,col_end,input,p)){
+                if(store_part_num_and_adjacent_gear_coordinates(row,col_start,col_end,input,p)){
                     p.pn = num;
-                    pg.push_back(p);
-                    cout<<num<<endl;
+                    part_num_and_associated_gear_list.push_back(p);
                 } 
-
             }
             i++;
         }
         row++;
     }
+
     //cout<<sum;
-    int sum_part2=0;
-    unordered_set<int>v;
-    for(int i=0;i<pg.size();i++){
+
+    for(int i=0;i<part_num_and_associated_gear_list.size();i++){
         int j=i+1;
-        while(j<pg.size()){
-            if(pg[i].gear_row==pg[j].gear_row && pg[i].gear_col == pg[j].gear_col && v.find(i)==v.end() && v.find(j)== v.end()){
-                sum_part2+=pg[i].pn * pg[j].pn;
-                v.insert(i);
-                v.insert(j); 
+        while(j<part_num_and_associated_gear_list.size()){
+            if(part_num_and_associated_gear_list[i].gear_row==part_num_and_associated_gear_list[j].gear_row && part_num_and_associated_gear_list[i].gear_col == part_num_and_associated_gear_list[j].gear_col && visited_indices.find(i)==visited_indices.end() && visited_indices.find(j)== visited_indices.end()){
+                sum_gear_ratios+=part_num_and_associated_gear_list[i].pn * part_num_and_associated_gear_list[j].pn;
+                visited_indices.insert(i);
+                visited_indices.insert(j); 
                 break;
             }
             j++;
         }
     }
-    cout<<sum_part2;
+    cout<<sum_gear_ratios;
     return 0;
 }
