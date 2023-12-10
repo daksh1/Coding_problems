@@ -1,9 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void calc_rank(string str,unordered_map<string,int>& hand_to_rank){
-    
-}
 void sort_hands_of_same_type(vector<char> order,vector<string> &hand_type_to_hands){
     for(int i=0;i<5;i++){
         for(int j=0;j<hand_type_to_hands.size();j++){
