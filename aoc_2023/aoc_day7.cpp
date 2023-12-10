@@ -82,20 +82,20 @@ void sort_hands_of_same_type(vector<char> order,vector<string> &hand_type_to_han
 //         hand_type_to_hands[it.first]=it.second;
 //     }
 
-//     for(auto jt: hand_type_to_hands["High card"])
-//         hand_to_rank[jt]=rank++;
-//     for(auto jt: hand_type_to_hands["One pair"])
-//         hand_to_rank[jt]=rank++;
-//     for(auto jt: hand_type_to_hands["Two pair"])
-//         hand_to_rank[jt]=rank++;
-//     for(auto jt: hand_type_to_hands["Three of a kind"])
-//         hand_to_rank[jt]=rank++;
-//     for(auto jt: hand_type_to_hands["Full house"])
-//         hand_to_rank[jt]=rank++;
-//     for(auto jt: hand_type_to_hands["Four of a kind"])
-//         hand_to_rank[jt]=rank++;
-//     for(auto jt: hand_type_to_hands["Five of a kind"])
-//         hand_to_rank[jt]=rank++;
+//     for(auto it: hand_type_to_hands["High card"])
+//         hand_to_rank[it]=rank++;
+//     for(auto it: hand_type_to_hands["One pair"])
+//         hand_to_rank[it]=rank++;
+//     for(auto it: hand_type_to_hands["Two pair"])
+//         hand_to_rank[it]=rank++;
+//     for(auto it: hand_type_to_hands["Three of a kind"])
+//         hand_to_rank[it]=rank++;
+//     for(auto it: hand_type_to_hands["Full house"])
+//         hand_to_rank[it]=rank++;
+//     for(auto it: hand_type_to_hands["Four of a kind"])
+//         hand_to_rank[it]=rank++;
+//     for(auto it: hand_type_to_hands["Five of a kind"])
+//         hand_to_rank[it]=rank++;
 
 //     // for(auto it: hand_type_to_hands){
 //     //     cout<< it.first<<"  ";
@@ -211,20 +211,20 @@ int main(){
         hand_type_to_hands[it.first]=it.second;
     }
 
-    for(auto jt: hand_type_to_hands["High card"])
-        hand_to_rank[jt]=rank++;
-    for(auto jt: hand_type_to_hands["One pair"])
-        hand_to_rank[jt]=rank++;
-    for(auto jt: hand_type_to_hands["Two pair"])
-        hand_to_rank[jt]=rank++;
-    for(auto jt: hand_type_to_hands["Three of a kind"])
-        hand_to_rank[jt]=rank++;
-    for(auto jt: hand_type_to_hands["Full house"])
-        hand_to_rank[jt]=rank++;
-    for(auto jt: hand_type_to_hands["Four of a kind"])
-        hand_to_rank[jt]=rank++;
-    for(auto jt: hand_type_to_hands["Five of a kind"])
-        hand_to_rank[jt]=rank++;
+    for(auto it: hand_type_to_hands["High card"])
+        hand_to_rank[it]=rank++;
+    for(auto it: hand_type_to_hands["One pair"])
+        hand_to_rank[it]=rank++;
+    for(auto it: hand_type_to_hands["Two pair"])
+        hand_to_rank[it]=rank++;
+    for(auto it: hand_type_to_hands["Three of a kind"])
+        hand_to_rank[it]=rank++;
+    for(auto it: hand_type_to_hands["Full house"])
+        hand_to_rank[it]=rank++;
+    for(auto it: hand_type_to_hands["Four of a kind"])
+        hand_to_rank[it]=rank++;
+    for(auto it: hand_type_to_hands["Five of a kind"])
+        hand_to_rank[it]=rank++;
 
     // for(auto it: hand_type_to_hands){
     //     cout<< it.first<<"  ";
