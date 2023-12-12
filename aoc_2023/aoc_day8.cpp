@@ -21,6 +21,7 @@ int main(){
     std::string line,starting_node="AAA",directions="";
     std::ifstream myfile ("input_aoc8");
     std::unordered_map<std::string,std::vector<std::string>> nav_map;
+    unsigned long LCM_of_moves;
     int moves=0;
     if (myfile.is_open()){
         while (getline(myfile,line)){
@@ -51,7 +52,6 @@ int main(){
     //     std::cout<< it<< "   ";
     // }
     // int max_moves=*max_element(moves_for_all_nodes.begin(),moves_for_all_nodes.end());
-    unsigned long LCM_of_moves;
     // for(LCM_of_moves=max_moves;true;LCM_of_moves++){
     //     int j;
     //     for(j=0;j<moves_for_all_nodes.size();j++){
