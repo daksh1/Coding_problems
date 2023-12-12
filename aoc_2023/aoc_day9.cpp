@@ -40,11 +40,10 @@ std::vector<int> difference_vector(std::vector<int> nums){
     }
     return vector_of_differences;
 }
-
 int main(){
     std::string line;
     std::ifstream myfile ("input_aoc9");
-    std::stack<int> last_num; 
+    std::stack<int> first_num; 
     int final_sum=0;
     if (myfile.is_open()){
         while (getline(myfile,line)){
@@ -54,16 +53,16 @@ int main(){
             int num_of_seq=0,sum=0;
             //std::cout<<are_all_numbers_zero(nums)<<std::endl; 
             while(!(are_all_numbers_zero(nums))){
-                last_num.push(nums[nums.size()-1]);
+                first_num.push(nums[0]);
                 num_of_seq++; 
                 nums=difference_vector(nums);
             }
             //std::cout<< num_of_seq<<std::endl; 
-            while(last_num.size() != 0){
-                sum+=last_num.top();   
-                last_num.pop();
+            while(first_num.size() != 0){
+                sum=first_num.top()-sum;   
+                first_num.pop();
             }
-            //std::cout<<sum<<std::endl;
+            // std::cout<<sum<<std::endl;
             final_sum+=sum;
 
         }
@@ -76,3 +75,38 @@ int main(){
     std::cout<<final_sum;
     return 0;
 }
+// int main(){
+//     std::string line;
+//     std::ifstream myfile ("input_aoc9");
+//     std::stack<int> last_num; 
+//     int final_sum=0;
+//     if (myfile.is_open()){
+//         while (getline(myfile,line)){
+//             std::vector<int> nums=split_at_space(line);
+//             // for(auto it: nums)
+//             //     std::cout<<it<<"  "<<std::endl;
+//             int num_of_seq=0,sum=0;
+//             //std::cout<<are_all_numbers_zero(nums)<<std::endl; 
+//             while(!(are_all_numbers_zero(nums))){
+//                 last_num.push(nums[nums.size()-1]);
+//                 num_of_seq++; 
+//                 nums=difference_vector(nums);
+//             }
+//             //std::cout<< num_of_seq<<std::endl; 
+//             while(last_num.size() != 0){
+//                 sum+=last_num.top();   
+//                 last_num.pop();
+//             }
+//             //std::cout<<sum<<std::endl;
+//             final_sum+=sum;
+
+//         }
+//         myfile.close();
+//     }
+//     else{
+//         std::cout<<"unable to open file";
+//     }
+
+//     std::cout<<final_sum;
+//     return 0;
+// }
